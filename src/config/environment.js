@@ -1,5 +1,21 @@
-/**
- * Updated by trungquandev.com's author on August 17 2023
- * YouTube: https://youtube.com/@trungquandev
- * "A bit of fragrance clings to the hand that gives flowers!"
- */
+import 'dotenv/config'
+
+export const env = {
+	MONGODB_URI: process.env.MONGODB_URI,
+	DB_NAME: process.env.DB_NAME,
+	LOCAL_DEV_HOST: process.env.LOCAL_DEV_HOST,
+	LOCAL_DEV_PORT: process.env.LOCAL_DEV_PORT,
+	LOCAL_DEV_FORNTEND_PORT: process.env.LOCAL_DEV_FORNTEND_PORT,
+
+	CLOUD_NAME: process.env.CLOUD_NAME,
+	API_KEY_CLOUDINARY: process.env.API_KEY_CLOUDINARY,
+	API_SECRET_CLOUDINARY: process.env.API_SECRET_CLOUDINARY,
+
+	BUILD_MODE: process.env.BUILD_MODE,
+
+	AUTHOR: process.env.AUTHOR,
+	APP_PASSWORK: process.env.APP_PASSWORK,
+	EMAIL: process.env.EMAIL
+
+
+}
