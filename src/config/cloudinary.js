@@ -13,7 +13,8 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
 	cloudinary: cloudinary,
 	params: {
-		folder: 'NgoGia'
+		folder: 'NgoGia',
+		resource_type: 'auto'
 	}
 })
 
@@ -30,4 +31,3 @@ export const deleteOnCoudinary = (linkImg) => {
 		console.log('error: ', error)
 	})
 }
-

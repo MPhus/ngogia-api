@@ -15,7 +15,8 @@ export const env = {
 
 	AUTHOR: process.env.AUTHOR,
 	APP_PASSWORK: process.env.APP_PASSWORK,
-	EMAIL: process.env.EMAIL
+	EMAIL: process.env.EMAIL,
+	ORDER_TOKEN_SECRET_SIGNATURE: process.env.ORDER_TOKEN_SECRET_SIGNATURE
 
 
 }
