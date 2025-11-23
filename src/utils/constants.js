@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb'
 import { env } from '~/config/environment'
 export const WHITELIST_DOMAIN = [
 	'http://localhost:5173',
-	'http://localhost:3000',
+	'https://ngogia-web.vercel.app',
 	'https://49fa-2402-800-6343-ec8-35b5-2ecb-6da0-e9d3.ngrok-free.app'
 ]
 export const PRODUCT_TYPE = {
