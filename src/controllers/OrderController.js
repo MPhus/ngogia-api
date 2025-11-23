@@ -12,7 +12,7 @@ const createNew = async (req, res, next) => {
 		const dataSaveDatabase = { ...dataSendmail, productList: dataSendmail.productList.map(item => { return { productID: item._id, quantity: item.quantityInCart } }) }
 
 		const emailToken = await JwtProvider.generateToken(dataSaveDatabase, env.ORDER_TOKEN_SECRET_SIGNATURE, '300s')
-		const test2 = `http://${env.LOCAL_DEV_HOST}:${env.LOCAL_DEV_FORNTEND_PORT}/verifyMail/${emailToken}`
+		const test2 = `${process.env.FRONTEND_HOST}/verifyMail/${emailToken}`
 		const htmlMail = dataSendmail.productList.map((item) => {
 			return `
 			<div style="min-width:320px; max-width: 320px;padding:8px 20px" >
