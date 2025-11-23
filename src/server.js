@@ -23,10 +23,9 @@ const START = () => {
   app.use(express.json())
 
   app.use('/v1', APIs_V1)
-  const PRODUCTION_HOST = '0.0.0.0'
   app.use(errorHandlingMiddleware)
   if (env.BUILD_MODE === 'production') {
-    app.listen(process.env.PORT, PRODUCTION_HOST, () => console.log(`Production: ${env.AUTHOR}'s app listening on PORT :${process.env.PORT}`))
+    app.listen(process.env.PORT, () => console.log(`Production: ${env.AUTHOR}'s app listening on PORT :${process.env.PORT}`))
   } else {
     app.listen(env.LOCAL_DEV_PORT, env.LOCAL_DEV_HOST, () => console.log(`Local Dev: ${env.AUTHOR}'s app listening on http://${env.LOCAL_DEV_HOST}:${env.LOCAL_DEV_PORT}`))
   }
