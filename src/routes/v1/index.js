@@ -9,6 +9,7 @@ import { orderRoute } from './OrderRoute'
 import { pageService } from '~/services/pageService'
 import { upload } from '~/config/cloudinary'
 import { orderController } from '~/controllers/OrderController'
+import { userRoute } from './userRoute'
 
 const Router = express.Router()
 
@@ -31,7 +32,8 @@ Router.use('/products', productRoute)
 Router.use('/news', newsRoute)
 Router.use('/brands', brandRoute)
 Router.use('/order', orderRoute)
-Router.post('/uploadTest', upload.array('thumb', 11), (req, res, next) => {
+Router.use('/users', userRoute)
+Router.post('/uploadTest', upload.array('thumb', 56), (req, res, next) => {
 	try {
 		res.status(StatusCodes.OK).json({ data: req.files })
 	} catch (error) {

@@ -38,7 +38,6 @@ const getAll = async () => {
 	}
 }
 const getById = async (id) => {
-	console.log(' id: ', id)
 	try {
 		const resuil = await GET_DB().collection(BRANDS_COLLECTION_NAME)
 			.findOne({

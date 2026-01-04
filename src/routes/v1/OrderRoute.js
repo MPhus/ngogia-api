@@ -7,6 +7,9 @@ const Router = express.Router()
 
 Router.route('/')
 	.post(orderControler.createNew)
+
+Router.route('/createNoPrice')
+	.post(orderControler.createNoPrice)
 Router.route('/verifyMail')
 	.get(orderControler.verifyOrder)
 

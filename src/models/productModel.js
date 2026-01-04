@@ -67,11 +67,10 @@ const getProductByPage = async (startIndex, limit, filterObj) => {
 	} else if (filterObj.price === 'decrease') {
 		sortOption = { price: -1 }
 	} else if (filterObj.price === 'latest') {
-		sortOption = { createdAt: -1, _id: -1 }
+		sortOption = { totalSold: -1 }
 	}
 	try {
 		const result = await GET_DB().collection(PRODUCT_COLLECTION_NAME).find(query).sort(sortOption).limit(limit).skip(startIndex).toArray()
-
 
 		const totalProduct = await GET_DB().collection(PRODUCT_COLLECTION_NAME).countDocuments(buildQuery(filterObj))
 		const totalPage = Math.ceil(totalProduct / limit)
