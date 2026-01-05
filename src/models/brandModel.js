@@ -29,8 +29,25 @@ const createNew = async (data) => {
 const getAll = async () => {
 	try {
 		const resuil = await GET_DB().collection(BRANDS_COLLECTION_NAME)
-			.find({})
-			.toArray()
+			.aggregate([
+				{
+					$addFields: {
+						nameOrder: {
+							$cond: [
+								{ $regexMatch: { input: '$name', regex: /^[A-Za-z]/ } },
+								0,
+								1
+							]
+						}
+					}
+				},
+				{
+					$sort: {
+						nameOrder: 1,
+						name: 1
+					}
+				}
+			]).toArray()
 		return resuil
 	} catch (error) {
 		throw new Error(error)

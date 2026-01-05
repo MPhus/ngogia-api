@@ -61,16 +61,46 @@ const buildQuery = (filterObj) => ({
 // isGetSoldOut
 const getProductByPage = async (startIndex, limit, filterObj) => {
 	const query = buildQuery(filterObj)
-	let sortOption = {}
-	if (filterObj.price === 'increase') {
-		sortOption = { price: 1 }
-	} else if (filterObj.price === 'decrease') {
-		sortOption = { price: -1 }
-	} else if (filterObj.price === 'latest') {
-		sortOption = { createAt: -1, name: -1 }
-	}
 	try {
-		const result = await GET_DB().collection(PRODUCT_COLLECTION_NAME).find(query).sort(sortOption).limit(limit).skip(startIndex).toArray()
+		let result = []
+		if (filterObj.price === 'increase' || filterObj.price === 'decrease') {
+			const sortOption =
+				filterObj.price === 'increase'
+					? { price: 1 }
+					: { price: -1 }
+
+			result = await GET_DB()
+				.collection(PRODUCT_COLLECTION_NAME)
+				.find(query)
+				.sort(sortOption)
+				.skip(startIndex)
+				.limit(limit)
+				.toArray()
+		}
+
+		else if (filterObj.price === 'latest') {
+			result = await GET_DB()
+				.collection(PRODUCT_COLLECTION_NAME)
+				.aggregate([
+					{ $match: query },
+					{
+						$addFields: {
+							nameOrder: {
+								$cond: [
+									{ $regexMatch: { input: '$name', regex: /^[A-Za-z]/ } },
+									0,
+									1
+								]
+							}
+						}
+					},
+					{ $sort: { nameOrder: 1, name: 1 } },
+					{ $skip: startIndex },
+					{ $limit: limit },
+					{ $project: { nameOrder: 0 } }
+				])
+				.toArray()
+		}
 
 		const totalProduct = await GET_DB().collection(PRODUCT_COLLECTION_NAME).countDocuments(buildQuery(filterObj))
 		const totalPage = Math.ceil(totalProduct / limit)
