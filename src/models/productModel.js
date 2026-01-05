@@ -67,7 +67,7 @@ const getProductByPage = async (startIndex, limit, filterObj) => {
 	} else if (filterObj.price === 'decrease') {
 		sortOption = { price: -1 }
 	} else if (filterObj.price === 'latest') {
-		sortOption = { totalSold: -1 }
+		sortOption = { createAt: -1, name: -1 }
 	}
 	try {
 		const result = await GET_DB().collection(PRODUCT_COLLECTION_NAME).find(query).sort(sortOption).limit(limit).skip(startIndex).toArray()
